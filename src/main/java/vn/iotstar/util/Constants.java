@@ -19,4 +19,10 @@ public class Constants {
     public static final String DIR = System.getProperty("user.home") + File.separator + "iotstar_uploads";
 
     public static final String DEFAULT_AVATAR = "avatar.png";
+    
+ // Tên thư mục dùng để lưu trữ file ảnh upload lên server[cite: 3]
+    public static final String UPLOAD_DIRECTORY = "uploads"; 
+    
+    // Tên file mặc định nếu không lấy được tên file từ quá trình upload[cite: 3]
+    public static final String DEFAULT_FILENAME = "default.file";
 }

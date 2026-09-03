@@ -42,6 +42,24 @@ public class UserDao implements IUserDao {
         }
     }
 
+    // Thực thi phương thức update để cập nhật dữ liệu Profile
+    @Override
+    public void update(User user) {
+        EntityManager enma = JPAConfig.getEntityManager();
+        EntityTransaction trans = enma.getTransaction();
+        try {
+            trans.begin();
+            enma.merge(user); // update dữ liệu ghi đè vào bảng
+            trans.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            trans.rollback();
+            throw e;
+        } finally {
+            enma.close();
+        }
+    }
+
     @Override
     public boolean checkExistEmail(String email) {
         EntityManager enma = JPAConfig.getEntityManager();

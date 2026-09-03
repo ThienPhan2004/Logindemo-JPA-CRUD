@@ -28,9 +28,16 @@ public class UserServiceImpl implements IUserService {
         java.sql.Date today = new java.sql.Date(millis);
 
         String hashedPassword = PasswordUtil.hash(password);
+        // Tham số thứ 5 truyền null tương ứng với trường 'images' lúc khởi tạo tài khoản mới
         User newUser = new User(email, username, fullname, hashedPassword, null, 5, phone, today);
         userDao.insert(newUser);
         return true;
+    }
+
+    // Thực thi phương thức update gọi xuống UserDao
+    @Override
+    public void update(User user) {
+        userDao.update(user);
     }
 
     @Override

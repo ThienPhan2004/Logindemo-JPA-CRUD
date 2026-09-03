@@ -28,8 +28,9 @@ public class User implements Serializable {
     @Column(name = "password", columnDefinition = "NVARCHAR(255) NOT NULL")
     private String passWord;
 
-    @Column(name = "avatar", columnDefinition = "NVARCHAR(255) NULL")
-    private String avatar;
+    // Đổi tên trường và cột thành images để khớp với form upload multipart
+    @Column(name = "images", columnDefinition = "NVARCHAR(255) NULL")
+    private String images; 
 
     @Column(name = "roleid")
     private int roleid;
@@ -44,12 +45,12 @@ public class User implements Serializable {
     }
 
     public User(String email, String userName, String fullName, String passWord,
-                 String avatar, int roleid, String phone, Date createdDate) {
+                 String images, int roleid, String phone, Date createdDate) {
         this.email = email;
         this.userName = userName;
         this.fullName = fullName;
         this.passWord = passWord;
-        this.avatar = avatar;
+        this.images = images;
         this.roleid = roleid;
         this.phone = phone;
         this.createdDate = createdDate;
@@ -70,8 +71,8 @@ public class User implements Serializable {
     public String getPassWord() { return passWord; }
     public void setPassWord(String passWord) { this.passWord = passWord; }
 
-    public String getAvatar() { return avatar; }
-    public void setAvatar(String avatar) { this.avatar = avatar; }
+    public String getImages() { return images; }
+    public void setImages(String images) { this.images = images; }
 
     public int getRoleid() { return roleid; }
     public void setRoleid(int roleid) { this.roleid = roleid; }

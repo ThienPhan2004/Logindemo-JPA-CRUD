@@ -8,6 +8,9 @@ public interface IUserDao {
 
     void insert(User user);
 
+    // Thêm hàm update để cập nhật dữ liệu Profile (fullname, phone, images) bằng JPA
+    void update(User user);
+
     boolean checkExistEmail(String email);
 
     boolean checkExistUsername(String username);

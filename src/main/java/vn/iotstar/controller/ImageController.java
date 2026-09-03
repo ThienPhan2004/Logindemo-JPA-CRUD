@@ -12,12 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import vn.iotstar.util.Constants;
+import vn.iotstar.util.Constants; //
 
-/**
- * Servlet doc file anh tu thu muc upload (Constants.DIR, nam NGOAI webapp)
- * va tra ve cho trinh duyet. Vi du: /image?fname=abc.jpg
- */
 @WebServlet(urlPatterns = "/image")
 public class ImageController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -25,23 +21,29 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        
+        // 1. Lấy tên file ảnh từ tham số URL
         String fname = req.getParameter("fname");
         if (fname == null || fname.trim().isEmpty()) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
+        // 2. Trỏ tới file ảnh trong thư mục vật lý (Constants.DIR)
         File file = new File(Constants.DIR, fname);
         if (!file.exists()) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
+        // 3. Xác định loại file (ví dụ: image/jpeg, image/png)
         String contentType = Files.probeContentType(Paths.get(file.getPath()));
         resp.setContentType(contentType != null ? contentType : "application/octet-stream");
 
+        // 4. Đọc file từ ổ cứng và đẩy lên stream cho trình duyệt hiển thị
         try (FileInputStream in = new FileInputStream(file);
              OutputStream out = resp.getOutputStream()) {
+            
             byte[] buffer = new byte[4096];
             int len;
             while ((len = in.read(buffer)) != -1) {
